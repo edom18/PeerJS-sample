@@ -388,13 +388,15 @@ function onReady(handler) {
   Leap.plugin('riggedHand', function(scope) {
     var addMesh, basicDotMesh, controller, createMesh, dots, getMesh, projector, removeMesh, spareMeshes, zeroVector,
       _this = this;
+
     if (scope == null) {
       scope = {};
     }
+
     this.use('handHold');
     this.use('handEntry');
     this.use('versionCheck', {
-      requiredProtocolVersion: 6
+        requiredProtocolVersion: 6
     });
     scope.offset || (scope.offset = new THREE.Vector3(0, -10, 0));
     scope.scale || (scope.scale = 1);
@@ -597,10 +599,13 @@ function onReady(handler) {
       }
       return _results;
     };
-    this.on('handFound', addMesh);
-    this.on('handLost', removeMesh);
-    return {
-      frame: function(frame) {
+    //this.on('handFound', addMesh);
+    //this.on('handLost', removeMesh);
+    
+    this.addMesh = addMesh;
+    this.removeMesh = removeMesh;
+
+    function onFrame(frame) {
         var boneColors, face, faceIndices, geometry, handMesh, hue, i, j, leapHand, lightness, mcp, offset, palm, saturation, weights, xBoneHSL, yBoneHSL, _base, _i, _j, _k, _l, _len, _len1, _len2, _len3, _name, _name1, _ref, _ref1, _ref2, _ref3;
         if (scope.stats) {
           scope.stats.begin();
@@ -612,6 +617,10 @@ function onReady(handler) {
             return finger.id;
           });
           handMesh = leapHand.data('riggedHand.mesh');
+          if (!handMesh) {
+              console.log('no hand mesh.');
+              continue;
+          }
           palm = handMesh.children[0];
           palm.positionLeap.fromArray(leapHand.palmPosition);
           _ref1 = palm.children;
@@ -694,7 +703,12 @@ function onReady(handler) {
         if (scope.stats) {
           return scope.stats.end();
         }
-      }
+    }
+
+    this.onFrame = onFrame;
+
+    return {
+      // frame: onFrame
     };
   });
 

@@ -34,9 +34,11 @@
     .use('riggedHand')
         .use('handEntry')
         .on('handFound', function(hand) {
-            console.log('hoge');
+            this.addMesh(hand);
         })
         .on('handLost', function(hand){
+            this.removeMesh(hand);
+
             var label = hand.data('label');
             if (label){
                 document.body.removeChild(label);

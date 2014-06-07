@@ -4,30 +4,42 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r66/three.js"></script>
+    <script src="//js.leapmotion.com/leap-0.6.0-beta3_1.min.js"></script>
+    <script src="js/lib/leap-plugins-0.1.5_1.js"></script>
+    <script src="js/lib/leap.rigged-hand-0.1.4.js"></script>
     <style>
         body, div, p {
             margin: 0;
             padding: 0;
         }
         #wrapper {
-            padding: 15px;
+            padding: 55px 15px 15px;
+        }
+        #console {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
         }
     </style>
 <body>
 
     <div id="wrapper">
-        <p>My ID: <span id="myID"></span></p>
-        <p>
-            Call with ID: <input type="text" id="yourID" value="" />
-            <input type="button" value="Call" id="send" />
-        </p>
-        <p>
-            <input type="text" id="message" value="" />
-            <input type="button" id="chat" value="発言" />
-        </p>
-        <p>
-            <input type="text" id="receive-message" value="" />
-        </p>
+        <div id="console">
+            <p>My ID: <span id="myID"></span></p>
+            <p>
+                Call with ID: <input type="text" id="yourID" value="" />
+                <input type="button" value="Call" id="send" />
+            </p>
+            <p>
+                <input type="text" id="message" value="" />
+                <input type="button" id="chat" value="発言" />
+            </p>
+            <p>
+                <input type="text" id="receive-message" value="" />
+            </p>
+        <!-- /#console --></div>
 
         <video id="myVideo" width="128" height="96" autoplay muted></video>
         <video id="remoteVideo" autoplay></video>
