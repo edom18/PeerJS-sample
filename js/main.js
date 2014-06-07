@@ -35,7 +35,7 @@
 
     ////////////////////////////////////////////////////////////////////////////////////
 
-    function sendMessage(mes) {
+    function showMessage(mes) {
         doc.getElementById('receive-message').value = mes;
     }
 
@@ -49,7 +49,7 @@
         conn = _conn;
         _conn.on('data', function(data){
             console.log('[1] on data: ', data);
-            sendMessage(data);
+            showMessage(data);
         });
     });
 
@@ -58,7 +58,7 @@
     // IDにコールを送る
     var btn = document.getElementById('send');
     btn.addEventListener('click', function () {
-        var inp = document.getElementById('yourID');
+        var inp = doc.getElementById('yourID');
         var id = inp.value;
 
         var call = peer.call(id, myStream);
@@ -73,7 +73,7 @@
             console.log('[2] on open data connection.');
             conn.on('data', function (data) {
                 console.log('[2] on data: ', data);
-                sendMessage(data);
+                showMessage(data);
             });
         });
     });
@@ -83,7 +83,13 @@
     var sendBtn = doc.getElementById('chat');
     sendBtn.addEventListener('click', function () {
         var message = doc.getElementById('message').value;
-        conn.send(message);
+        conn.send({
+            message: message,
+            object: {
+                hoge: 'foo',
+                fuga: [1, 2, 3]
+            }
+        });
     });
 
 }(window, document));
