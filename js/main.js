@@ -1,6 +1,7 @@
 (function (win, doc) {
     'use strict';
 
+    var DEBUG = true;
 
     var api_key = 'ri24c8vjfvpfogvi';
 
@@ -8,7 +9,7 @@
 
     // PeerJSに接続したらpeer IDが発行される
     peer.on('open', function(id) {
-        doc.getElementById('myID').innerHTML = 'My peer ID is: ' + id;
+        doc.getElementById('myID').innerHTML += id;
     });
 
     var myStream;
@@ -35,12 +36,13 @@
     ////////////////////////////////////////////////////////////////////////////////////
 
     function showMessage(mes) {
-        doc.getElementById('receive-message').value = mes;
+        doc.getElementById('receive-message').innerHTML  += mes + '<br />';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     
     function onDataHandler(data) {
+
         console.log('onDataHandler: ', data);
 
         var hand, frame;
@@ -107,18 +109,19 @@
 
     var sendBtn = doc.getElementById('chat');
     sendBtn.addEventListener('click', function () {
-        var message = doc.getElementById('message').value;
+        var ele = doc.getElementById('message');
+        var message = ele.value;
+        showMessage(message);
+        ele.value = '';
         conn.send({
             type: 'message',
             message: message,
-            object: {
-                hoge: 'foo',
-                fuga: [1, 2, 3]
-            }
+            object: null
         });
     });
 
     ////////////////////////////////////////////////////////////////////////////////////
+    // For Leap motion.
 
     function filterPropertiesForHand(hand) {
         var result = {};
@@ -157,7 +160,7 @@
             return;
         }
 
-        // Leap.loopController.onFrame(frame);
+        DEBUG && Leap.loopController.onFrame(frame);
 
         // if ((cnt++) % 2 === 0) {
            if (conn) {
@@ -176,7 +179,7 @@
         .use('handHold')
         .use('handEntry')
         .on('handFound', function(hand) {
-            // this.addMesh(hand);
+            DEBUG && this.addMesh(hand);
 
             if (conn) {
                 var result   = filterPropertiesForHand(hand);
@@ -190,7 +193,7 @@
             }
         })
         .on('handLost', function(hand){
-            // this.removeMesh(hand);
+            DEBUG && this.removeMesh(hand);
             
             if (conn) {
                 var result   = filterPropertiesForHand(hand);
