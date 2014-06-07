@@ -8,79 +8,10 @@
     <script src="//js.leapmotion.com/leap-0.6.0-beta3_1.min.js"></script>
     <script src="js/lib/leap-plugins-0.1.5_1.js"></script>
     <script src="js/lib/leap.rigged-hand-0.1.4.js"></script>
-    <style>
-        body {
-            font-size: 12px;
-        }
-        body, div, p {
-            margin: 0;
-            padding: 0;
-        }
-        #wrapper {
-            padding: 75px 15px 15px;
-        }
-        #console {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 100;
-        }
-        #chat-area {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            z-index: 100;
-            width: 100%;
-            height: 55px;
-            padding: 10px;
-            background: #f1f1f1;
-            border-top: solid 1px #aaa;
-            box-sizing: border-box;
-        }
-        #message {
-            width: 90%;
-            height: 30px;
-            line-height: 30px;
-            border: solid 1px #999;
-        }
-        #chat,
-        #send {
-            padding: 5px 15px;
-            border: solid 1px #999;
-            background-color: #eee;
-        }
-        #receive-message-area {
-            position: fixed;
-            left: 0;
-            bottom: 50px;
-            z-index: 100;
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border-top: solid 1px #aaa;
-        }
-        #receive-message {
-            overflow: auto;
-            max-height: 100px;
-        }
-        #myVideo {
-            position: fixed;
-            bottom: 106px;
-            right: 10px;
-        }
-        #video {
-            text-align: center;
-        }
-        #yourID {
-            border: none;
-            border-bottom: solid 1px #ccc;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 <body>
-
     <div id="wrapper">
         <div id="console">
-            <p>My peer ID is: <span id="myID"></span></p>
             <p>
                 Call to: <input type="text" id="yourID" value="" />
                 <input type="button" value="Call" id="send" />
@@ -88,7 +19,7 @@
         <!-- /#console --></div>
 
         <div id="receive-message-area">
-            <p id="receive-message"></p>
+            <div id="receive-message"></div>
         <!-- /#receive-message-area --></div>
 
         <div id="chat-area">
@@ -99,7 +30,7 @@
         <!-- /#chat-area --></div>
 
         <video id="myVideo" width="128" height="96" autoplay muted></video>
-        <div id="video">
+        <div id="video-area">
             <video id="remoteVideo" autoplay></video>
         <!-- /#video --></div>
     <!-- /#wrapper --></div>

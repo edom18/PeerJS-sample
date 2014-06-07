@@ -1,0 +1,74 @@
+body {
+    font-size: 12px;
+}
+body, div, p {
+    margin: 0;
+    padding: 0;
+}
+#wrapper {
+    max-width: 640px;
+    padding: 75px 15px 15px;
+}
+#console {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+#chat-area {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    height: 55px;
+    padding: 10px;
+    background: #f1f1f1;
+    border-top: solid 1px #aaa;
+    box-sizing: border-box;
+}
+#message {
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    border: solid 1px #999;
+}
+#chat,
+#send {
+    padding: 5px 15px;
+    border: solid 1px #999;
+    background-color: #eee;
+}
+#receive-message-area {
+    position: fixed;
+    left: 0;
+    bottom: 50px;
+    z-index: 100;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-top: solid 1px #aaa;
+}
+#receive-message {
+    overflow: auto;
+    max-height: 100px;
+}
+.system {
+    text-align: center;
+    color: #666;
+}
+#myVideo {
+    position: fixed;
+    bottom: 106px;
+    right: 10px;
+}
+#remoteVideo {
+    width: 100%;
+}
+#video-area {
+    text-align: center;
+}
+#yourID {
+    border: none;
+    border-bottom: solid 1px #ccc;
+}

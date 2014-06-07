@@ -1,7 +1,7 @@
 (function (win, doc) {
     'use strict';
 
-    var DEBUG = true;
+    var DEBUG = false;
 
     var api_key = 'ri24c8vjfvpfogvi';
 
@@ -9,9 +9,10 @@
 
     // PeerJSに接続したらpeer IDが発行される
     peer.on('open', function(id) {
-        doc.getElementById('myID').innerHTML += id;
+        showMessage('My peer ID is: <strong>' + id + '</strong>', 'system');
     });
 
+    // 動画ストリームを取得
     var myStream;
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     navigator.getUserMedia({video: true, audio: true}, function(stream) {
@@ -19,6 +20,7 @@
 
         var myVideo = doc.getElementById('myVideo');
         myVideo.src = URL.createObjectURL(stream);
+        adjustVideo();
     }, function(err) {
         console.log('Failed to get local stream' ,err);
     });
@@ -29,14 +31,28 @@
             var remoteVideo = doc.getElementById('remoteVideo');
             remoteVideo.src = URL.createObjectURL(yourStream);
         });
-
-        //conn = peer.connect(call.peer);
     });
 
     ////////////////////////////////////////////////////////////////////////////////////
 
-    function showMessage(mes) {
-        doc.getElementById('receive-message').innerHTML  += mes + '<br />';
+    var receiveMessage     = doc.getElementById('receive-message');
+    var receiveMessageArea = doc.getElementById('receive-message-area');
+    var myVideo            = doc.getElementById('myVideo');
+    function showMessage(mes, type) {
+        var chat = doc.createElement('p');
+        chat.innerHTML = mes;
+        if (type === 'system') {
+            chat.className = 'system';
+        }
+        receiveMessage.appendChild(chat);
+        adjustVideo();
+    }
+
+    function adjustVideo() {
+        var rect = receiveMessageArea.getBoundingClientRect();
+        var videoRect = myVideo.getBoundingClientRect();
+        var bottom = window.innerHeight - rect.top + 10;
+        myVideo.style.bottom = bottom + 'px';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

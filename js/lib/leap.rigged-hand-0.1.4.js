@@ -361,7 +361,7 @@ function onReady(handler) {
     pointLight.lookAt(new THREE.Vector3(0, 0, 0));
     this.scene.add(pointLight);
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-    this.camera.position.fromArray([0, 6, 30]);
+    this.camera.position.fromArray([0, 6, -30]);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     if (!this.renderer) {
       this.renderer = new THREE.WebGLRenderer({
