@@ -11,15 +11,6 @@
         doc.getElementById('myID').innerHTML = 'My peer ID is: ' + id;
     });
 
-    // 接続確立
-    var conn;
-    peer.on('connection', function(_conn) {
-        conn = _conn;
-        _conn.on('data', function(data){
-            doc.getElementById('receive-message').value = data;
-        });
-    });
-
     var myStream;
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     navigator.getUserMedia({video: true, audio: true}, function(stream) {
@@ -44,6 +35,26 @@
 
     ////////////////////////////////////////////////////////////////////////////////////
 
+    function sendMessage(mes) {
+        doc.getElementById('receive-message').value = mes;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    
+    // 接続確立
+    var conn;
+    peer.on('connection', function(_conn) {
+        console.log('Connected data connection.', _conn);
+
+        conn = _conn;
+        _conn.on('data', function(data){
+            console.log('[1] on data: ', data);
+            sendMessage(data);
+        });
+    });
+
+    ////////////////////////////////////////////////////////////////////////////////////
+
     // IDにコールを送る
     var btn = document.getElementById('send');
     btn.addEventListener('click', function () {
@@ -57,7 +68,14 @@
         });
 
         // データコネクションを開始
-        //conn = peer.connect(id);
+        conn = peer.connect(id);
+        conn.on('open', function () {
+            console.log('[2] on open data connection.');
+            conn.on('data', function (data) {
+                console.log('[2] on data: ', data);
+                sendMessage(data);
+            });
+        });
     });
 
     ////////////////////////////////////////////////////////////////////////////////////
