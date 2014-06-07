@@ -11,6 +11,7 @@ body, div, p {
 }
 #callTo {
     position: absolute;
+    left: 0;
     top: 50%;
     z-index: 100;
     width: 100%;
@@ -25,17 +26,36 @@ body, div, p {
     width: 100%;
     height: 55px;
     padding: 10px;
-    background: #e1e1fe;
+    background: #412f3c;
     border-top: solid 1px #aaa;
     box-sizing: border-box;
+    vertical-align: middle;
 }
 #message {
+    outline: none;
     width: 90%;
     height: 30px;
+    padding: 0 5px;
     line-height: 30px;
-    border: solid 1px #999;
+    font-size: 130%;
+    color: #fff;
+    border: solid 1px #61455b;
+    background: #51354b;
+    vertical-align: middle;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2) inset;
 }
-#chat,
+#chat {
+    height: 30px;
+    line-height: 30px;
+    padding: 1px 15px;
+    border: solid 1px #61455b;
+    background: #392a36 linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+    color: #fff;
+    font-size: 120%;
+    vertical-align: middle;
+    box-sizing: content-box;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
 #send {
     padding: 5px 15px;
     border: solid 1px #999;
@@ -50,10 +70,19 @@ body, div, p {
     padding: 10px;
     box-sizing: border-box;
     border-top: solid 1px #aaa;
+    background: #ddd;
 }
 #receive-message {
     overflow: auto;
     max-height: 100px;
+}
+#receive-message p {
+    padding: 10px 5px;
+    border-top: solid 1px #aaa;
+}
+#receive-message p:first-child {
+    border-top: 0;
+    border-top: none;
 }
 .system {
     text-align: center;
