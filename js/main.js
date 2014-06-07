@@ -30,6 +30,7 @@
         call.on('stream', function (yourStream) {
             var remoteVideo = doc.getElementById('remoteVideo');
             remoteVideo.src = URL.createObjectURL(yourStream);
+            hideCallBox();
         });
     });
 
@@ -53,6 +54,10 @@
         var videoRect = myVideo.getBoundingClientRect();
         var bottom = window.innerHeight - rect.top + 10;
         myVideo.style.bottom = bottom + 'px';
+    }
+
+    function hideCallBox() {
+        doc.getElementById('callTo').style.display = 'none';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -111,6 +116,7 @@
         call.on('stream', function (yourStream) {
             var remoteVideo = doc.getElementById('remoteVideo');
             remoteVideo.src = URL.createObjectURL(yourStream);
+            hideCallBox();
         });
 
         // データコネクションを開始

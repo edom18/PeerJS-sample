@@ -9,11 +9,13 @@ body, div, p {
     max-width: 640px;
     padding: 75px 15px 15px;
 }
-#console {
+#callTo {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 50%;
     z-index: 100;
+    width: 100%;
+    margin-top: -40px;
+    text-align: center;
 }
 #chat-area {
     position: fixed;
@@ -23,7 +25,7 @@ body, div, p {
     width: 100%;
     height: 55px;
     padding: 10px;
-    background: #f1f1f1;
+    background: #e1e1fe;
     border-top: solid 1px #aaa;
     box-sizing: border-box;
 }
@@ -69,6 +71,10 @@ body, div, p {
     text-align: center;
 }
 #yourID {
+    outline: none;
+    width: 250px;
+    height: 2em;
+    line-height: 2;
     border: none;
     border-bottom: solid 1px #ccc;
 }
