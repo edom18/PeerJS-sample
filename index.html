@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+    <style>
+        body, div, p {
+            margin: 0;
+            padding: 0;
+        }
+        #wrapper {
+            padding: 15px;
+        }
+    </style>
+<body>
+
+    <div id="wrapper">
+        <p>My ID: <span id="myID"></span></p>
+        <p>
+            Call with ID: <input type="text" id="yourID" value="" />
+            <input type="button" value="Call" id="send" />
+        </p>
+        <p>
+            <input type="text" id="message" value="" />
+            <input type="button" id="chat" value="発言" />
+        </p>
+        <p>
+            <input type="text" id="receive-message" value="" />
+        </p>
+
+        <video id="myVideo" width="128" height="96" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+    <!-- /#wrapper --></div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
