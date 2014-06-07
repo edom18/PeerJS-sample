@@ -40,13 +40,24 @@
     var receiveMessageArea = doc.getElementById('receive-message-area');
     var myVideo            = doc.getElementById('myVideo');
     function showMessage(mes, type) {
+
+        if (mes === '') {
+            return;
+        }
+
         var chat = doc.createElement('p');
         chat.innerHTML = mes;
         if (type === 'system') {
+            chat.innerHTML = '---- ' + chat.innerHTML + ' ----';
             chat.className = 'system';
         }
         receiveMessage.appendChild(chat);
+        scrollToBottom();
         adjustVideo();
+    }
+
+    function scrollToBottom() {
+        receiveMessage.scrollTop = 1000000;
     }
 
     function adjustVideo() {
@@ -129,9 +140,8 @@
 
     ////////////////////////////////////////////////////////////////////////////////////
 
-    var sendBtn = doc.getElementById('chat');
-    sendBtn.addEventListener('click', function () {
-        var ele = doc.getElementById('message');
+    var ele = doc.getElementById('message');
+    function sendMessage() {
         var message = ele.value;
         showMessage(message);
         ele.value = '';
@@ -140,6 +150,16 @@
             message: message,
             object: null
         });
+    }
+
+    var sendBtn = doc.getElementById('chat');
+    sendBtn.addEventListener('click', sendMessage);
+
+    var mesBox = doc.getElementById('message');
+    mesBox.addEventListener('keydown', function (e) {
+        if (e.keyCode === 13) {
+            sendMessage();
+        }
     });
 
     ////////////////////////////////////////////////////////////////////////////////////
