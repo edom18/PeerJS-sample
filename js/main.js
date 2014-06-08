@@ -1,7 +1,7 @@
 (function (win, doc) {
     'use strict';
 
-    var DEBUG = false;
+    var DEBUG = true;
 
     var api_key = 'ri24c8vjfvpfogvi';
 
