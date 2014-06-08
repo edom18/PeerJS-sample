@@ -5,7 +5,15 @@
 
     var api_key = 'ri24c8vjfvpfogvi';
 
-    var peer = new Peer({key: api_key}); 
+    var peer = new Peer({
+        key: api_key,
+        config: {
+            'iceServers': [
+                { url: 'stun:stun.l.google.com:19302' },
+                { url: 'turn:homeo@turn.bistri.com:80', credential: 'homeo' }
+            ]
+        }
+    });
 
     // PeerJSに接続したらpeer IDが発行される
     peer.on('open', function(id) {
