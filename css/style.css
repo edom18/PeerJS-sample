@@ -6,7 +6,6 @@ body, div, p {
     padding: 0;
 }
 #wrapper {
-    max-width: 640px;
     padding: 75px 15px 15px;
 }
 #callTo {
@@ -93,12 +92,14 @@ body, div, p {
     bottom: 106px;
     right: 10px;
 }
-#remoteVideo {
-    width: 100%;
-}
 #video-area {
+    max-width: 640px;
+    margin: 0 auto;
     text-align: center;
 }
+    #remoteVideo {
+        width: 100%;
+    }
 #yourID {
     outline: none;
     width: 250px;
