@@ -81,6 +81,11 @@
 
     ////////////////////////////////////////////////////////////////////////////////////
     
+    /**
+     * データチャネルハンドラ
+     *
+     * @param {Object} data 受信データ
+     */
     function onDataHandler(data) {
 
         console.log('onDataHandler: ', data);
@@ -121,6 +126,7 @@
 
         conn = _conn;
         _conn.on('data', onDataHandler);
+        hideCallBox();
     });
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -130,19 +136,24 @@
     btn.addEventListener('click', function () {
         var inp = doc.getElementById('yourID');
         var id = inp.value;
+        var call;
 
-        var call = peer.call(id, myStream);
-        call.on('stream', function (yourStream) {
-            var remoteVideo = doc.getElementById('remoteVideo');
-            remoteVideo.src = URL.createObjectURL(yourStream);
-            hideCallBox();
-        });
+        // カメラが接続されている場合はそれを使ってcallする
+        if (myStream) {
+            call = peer.call(id, myStream);
+            call.on('stream', function (yourStream) {
+                var remoteVideo = doc.getElementById('remoteVideo');
+                remoteVideo.src = URL.createObjectURL(yourStream);
+                hideCallBox();
+            });
+        }
 
         // データコネクションを開始
         conn = peer.connect(id);
         conn.on('open', function () {
             console.log('[2] on open data connection.');
             conn.on('data', onDataHandler);
+            hideCallBox();
         });
     });
 
@@ -210,6 +221,10 @@
             return;
         }
 
+        if ((cnt++) % 3 === 0) {
+            return;
+        }
+
         DEBUG && Leap.loopController.onFrame(frame);
 
         // if ((cnt++) % 2 === 0) {
@@ -229,6 +244,7 @@
         .use('handHold')
         .use('handEntry')
         .on('handFound', function(hand) {
+
             DEBUG && this.addMesh(hand);
 
             if (conn) {
